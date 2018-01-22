@@ -30,6 +30,6 @@ services:
         depends_on:
             - "db"
         tty: true
-        command: ["npm", "start"]
+        command: ["nodemon", "-exec 'npm start'"]
     db:
       image: mongo
