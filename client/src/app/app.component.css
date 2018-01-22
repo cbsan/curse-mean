@@ -9,3 +9,8 @@
     margin: 5px;
     padding: 5px;
 }
+
+.form-label {
+    display: inline-block;
+    min-width: 100px;
+}

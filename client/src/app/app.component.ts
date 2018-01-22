@@ -8,6 +8,12 @@ import { Component } from '@angular/core';
 export class AppComponent {
     title = 'Cursos';
 
+    newItem = {
+        name: '',
+        price: 0,
+        category: ''
+    };
+
     myList = [
         {
             name: 'Angular',
@@ -19,4 +25,19 @@ export class AppComponent {
             category: 'Front-End'
         }
     ];
+
+    createItem() {
+        this.myList.push(this.newItem);
+
+        this.newItem = {
+            name: '',
+            price: 0,
+            category: ''
+        };
+    }
+
+    removeItem(item) {
+        var index = this.myList.indexOf(item);
+        this.myList.splice(index, 1);
+    }
 }
