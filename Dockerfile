@@ -19,6 +19,6 @@ RUN apk add --no-cache --virtual \
 
 WORKDIR /usr/src/app
 
-EXPOSE 4200
+EXPOSE 4200 3000
 
 # CMD ["npm","start"]

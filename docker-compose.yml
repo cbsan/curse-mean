@@ -1,18 +1,35 @@
 version: '2'
 
 services:
-    server:
+    client:
         build: .
         ports:
             - "4200:4200"
         volumes:
             - "~/.ssh:/root/.ssh"
-            - "./server:/usr/src/app"
+            - "./client:/usr/src/app"
         links:
             - "db"
         depends_on:
             - "db"
         tty: true
-        command: ["nodemon", "-exec 'npm start'"]
+        links:
+            - "server"
+        # command: ["nodemon", "-exec 'npm start'"]
+    server:
+        build: .
+        ports:
+            - "3000:3000"
+        volumes:
+            - "~/.ssh:/root/.ssh"
+            - "./server:/usr/src/app"
+        environment:
+            NODE_ENV: development
+        links:
+            - "db"
+        depends_on:
+            - "db"
+        tty: true
+        command: ["npm", "start"]
     db:
       image: mongo
