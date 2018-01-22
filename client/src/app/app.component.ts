@@ -6,5 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+    title = 'Cursos';
+
+    myList = [
+        {
+            name: 'Angular',
+            price: 140,
+            category: 'Front-End'
+        },{
+            name: 'Express',
+            price: 180,
+            category: 'Front-End'
+        }
+    ];
 }
