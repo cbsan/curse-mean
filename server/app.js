@@ -11,6 +11,7 @@ var app = express();
 //Routes
 app.use('/cursos', cursos);
 
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
