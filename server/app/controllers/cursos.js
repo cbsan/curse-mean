@@ -11,29 +11,39 @@ var listCurses = [
 ];
 
 module.exports = ((app) => {
-    var controller = {
+    var Curso = app.models.cursos;
+
+    var Controller = {
         listAll: ((req, res) => {
-            res.json(listCurses);
+            Curso.find({}, [], {sort: {name: 1}})
+                .exec()
+                .then(cursos => {
+                    res.json(cursos);
+                })
         }),
         create: ((req, res) => {
-            var newCurse = req.body;
+            var newCurse = new Curso(req.body);
 
-            listCurses.push(newCurse);
-            res.json(listCurses);
+            newCurse.save((err, resp) => {
+                if (err) {
+                    res.status(500).end();
+                    console.error(err);
+                } else {
+                    res.json(resp);
+                }
+            })
         }),
         remove: ((req, res) => {
-            var name = req.params['name'];
-
-            var item = listCurses.find(item => item.name === name);
-
-            if (item) {
-                var index = listCurses.indexOf(item);
-                listCurses.splice(index, 1);
-            }
-
-            res.json(listCurses);
+            Curso.remove({_id: req.params['id']}, ((err, resp) => {
+                if (!err) {
+                    res.json({'message':'success'});
+                } else {
+                    res.status(500).end();
+                    console.error(err);
+                }
+            }));
         })
     }
 
-    return controller;
+    return Controller;
 });

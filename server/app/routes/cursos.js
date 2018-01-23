@@ -6,7 +6,7 @@ module.exports = ((app) => {
 
     router.get('/', Controller.listAll);
     router.post('/', Controller.create);
-    router.delete('/:name', Controller.remove);
+    router.delete('/:id', Controller.remove);
 
     app.use('/cursos', router);
 });

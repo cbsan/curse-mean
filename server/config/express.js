@@ -12,7 +12,8 @@ module.exports = (() => {
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(cookieParser());
 
-    load('controllers', {cwd: 'app'})
+    load('models', {cwd: 'app'})
+        .then('controllers')
         .then('routes')
         .into(app);
 
