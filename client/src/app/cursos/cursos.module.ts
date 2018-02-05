@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { ListCurseComponent } from './list-curse/list-curse.component';
 import { MyFormComponent } from './my-form/my-form.component';
+import { CursosService } from './cursos.service';
+
 
 @NgModule({
   imports: [
@@ -11,6 +13,7 @@ import { MyFormComponent } from './my-form/my-form.component';
     FormsModule
   ],
   exports: [ListCurseComponent, MyFormComponent],
-  declarations: [ListCurseComponent, MyFormComponent]
+  declarations: [ListCurseComponent, MyFormComponent],
+  providers: [CursosService]
 })
 export class CursosModule { }

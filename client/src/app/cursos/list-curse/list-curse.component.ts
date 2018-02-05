@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { CursosService } from '../cursos.service';
+
+
 @Component({
   selector: 'app-list-curse',
   templateUrl: './list-curse.component.html',
@@ -7,21 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListCurseComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private cursosService: CursosService
+  ) { }
 
   ngOnInit() {
   }
 
-  myList = [
-        {
-            name: 'Angular',
-            price: 140,
-            category: 'Front-End'
-        },{
-            name: 'Express',
-            price: 180,
-            category: 'Front-End'
-        }
-    ];
+  get myList() {
+    return this.cursosService.myList;
+  }
+
+  removeItem(item) {
+    this.cursosService.removeItem(item);
+  }
+
 
 }

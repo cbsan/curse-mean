@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { CursosService } from '../cursos.service';
+
 @Component({
   selector: 'app-my-form',
   templateUrl: './my-form.component.html',
@@ -9,32 +11,22 @@ export class MyFormComponent implements OnInit {
 
     title = 'Cursos';
 
-    myList = [
-        {
-            name: 'Angular',
-            price: 140,
-            category: 'Front-End'
-        },{
-            name: 'Express',
-            price: 180,
-            category: 'Front-End'
-        }
-    ];
-
     newItem = {
         name: '',
         price: 0,
         category: ''
     };
 
-    constructor() { }
+    constructor(
+        private cursosService: CursosService
+    ) { }
 
     ngOnInit() {
     }
 
 
     createItem() {
-        this.myList.push(this.newItem);
+        this.cursosService.createItem(this.newItem);
 
         this.newItem = {
             name: '',
@@ -42,10 +34,4 @@ export class MyFormComponent implements OnInit {
             category: ''
         };
     }
-
-    removeItem(item) {
-        var index = this.myList.indexOf(item);
-        this.myList.splice(index, 1);
-    }
-
 }
