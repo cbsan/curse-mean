@@ -14,7 +14,8 @@ export class ListCurseComponent implements OnInit {
     private cursosService: CursosService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(){
+    this.cursosService.findAll()
   }
 
   get myList() {

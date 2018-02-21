@@ -46,7 +46,8 @@ export class MyFormComponent implements OnInit, OnDestroy {
 
     getItemById(id) {
         if (id) {
-            this.newItem = this.cursosService.myList.find(item => item.name === id);
+          this.newItem =
+              this.cursosService.myList.find(item => item._id === id);
         } else {
             this.newItem = {name: '', price: 0, category: ''};
         }

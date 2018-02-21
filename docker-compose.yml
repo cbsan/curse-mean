@@ -9,7 +9,7 @@ services:
             - "~/.ssh:/root/.ssh"
             - "./client:/usr/src/app"
         links:
-            - "db"
+            - "server"
         depends_on:
             - "server"
         tty: true
