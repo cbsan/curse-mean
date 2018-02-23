@@ -4,12 +4,12 @@ import { Http } from '@angular/http';
 @Injectable()
 export class CursosService {
 
-    private api = 'http://127.0.0.1:3000/cursos/';
+    private api = 'http://127.0.0.1:3000/cursos';
 
     constructor(
         private http: Http
     ) { }
-      
+
   	myList = [];
 
     findAll() {
@@ -33,6 +33,6 @@ export class CursosService {
                 var index = this.myList.indexOf(item);
                 this.myList.splice(index, 1);
             });
-      
+
     }
 }
