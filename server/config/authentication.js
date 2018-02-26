@@ -7,20 +7,22 @@ var ExtractJwt = passportJWT.ExtractJwt;
 var JwtStrategy = passportJWT.Strategy;
 
 var jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('jwt'),
   secretOrKey: 'minhaChaveSecreta'
 }
 
-                 module.exports = {
+module.exports = {
   login: function(name, password, callback) {
-    var User = mongoose.models.usuario;
+    var User = mongoose.models.Usuario;
 
     User.findOne({name, password}).exec().then(user => {
       if (user) {
         var payload = {_id: user._id};
         var token = jwt.sign(payload, jwtOptions.secretOrKey);
 
-        callback({'message':'Ok', token});
+        callback({'message': 'ok', token});
+      } else {
+        callback(false);
       }
     })
   }
