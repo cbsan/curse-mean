@@ -12,6 +12,30 @@ var jwtOptions = {
 }
 
 module.exports = {
+  get auth() {
+    var User = mongoose.models.Usuario;
+
+    var strategy = new JwtStrategy(jwtOptions, (jwt_payload, next) => {
+      User.findById(jwt_payload._id).exec().then(user => {
+        if (user) {
+          next(null, user);
+        } else {
+          next(null, false);
+        }
+      })
+    })
+
+    passport.use(strategy);
+
+    return {
+      initialize: () => {
+        return passport.initialize();
+      },
+      get authenticate() {
+        return passport.authenticate('jwt', {session: false});
+      }
+    }
+  },
   login: function(name, password, callback) {
     var User = mongoose.models.Usuario;
 
