@@ -1,32 +1,39 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 
-@Injectable()
-export class CursosService {
+import { AuthenticationService } from '../authentication.service';
 
-    private api = 'http://127.0.0.1:3000/cursos';
+@Injectable() export class CursosService {
 
-    constructor(
-        private http: Http
-    ) { }
+  private api = 'http://127.0.0.1:3000/cursos';
 
-  	myList = [];
+  constructor(
+      private http: Http,
+      private AuthenticationService: AuthenticationService) {}
 
-    findAll() {
+  myList = [];
+
+  findAll() {
         this.http.get(this.api)
             .subscribe(response => {
                 this.myList = response.json();
             });
-    }
+  }
 
-    createItem(newItem){
-      this.http.post(this.api, newItem)
+  createItem(newItem) {
+      var options = new RequestOptions({
+        headers: new Headers({
+          'Authorization': 'JWT '+this.AuthenticationService.token
+        })
+      });
+
+      this.http.post(this.api, newItem, options)
           .subscribe(response => {
             this.myList.push(response.json());
         });
-    }
+  }
 
-    removeItem(item) {
+  removeItem(item) {
         this.http.delete(`${this.api}/${item._id}`)
             .subscribe(response => {
                 console.info(response.json());
@@ -34,5 +41,4 @@ export class CursosService {
                 this.myList.splice(index, 1);
             });
 
-    }
-}
+  }}

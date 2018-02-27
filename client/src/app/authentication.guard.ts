@@ -21,7 +21,7 @@ export class AuthenticationGuard implements CanActivate {
     }
 
     console.info('Àrea restrita! Favor efetuar login...');
-    this.Router.navigate(['/']);
+    this.Router.navigate(['/login']);
 
     return false;
   }

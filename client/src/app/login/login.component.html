@@ -1,0 +1,15 @@
+<form class="my-form" *ngIf="!isLogged">
+  <div class="form-line">
+    <label class="form-label" for="name">Nome</label>
+    <input type="text" id="name" name="name" [(ngModel)]="login.name" />
+  </div>
+  <div class="form-line">
+    <label class="form-label" for="password">Senha</label>
+    <input type="password" id="password" name="password" [(ngModel)]="login.password" />
+  </div>
+  <button (click)="log()">Logar</button>
+</form>
+
+<div *ngIf="isLogged">
+  Usuário logado!
+</div>
