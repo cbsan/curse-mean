@@ -6,7 +6,7 @@ import { MyFormComponent } from './cursos/my-form/my-form.component';
 import { AuthenticationGuard } from './authentication.guard';
 
 const APP_ROUTES = [
-    {path: 'cursos/new', component: MyFormComponent, canActivate: AuthenticationGuard},
+    {path: 'cursos/new', component: MyFormComponent, canActivate: [AuthenticationGuard]},
     {path: 'cursos/:id', component: MyFormComponent}
 ]
 @NgModule({
